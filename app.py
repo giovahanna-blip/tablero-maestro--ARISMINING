@@ -1,4 +1,4 @@
-import streamlit as st
+Pythonimport streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -91,7 +91,7 @@ details.kpi-btn[open] .click-hint-kpi { display: none; }
 .mech-icon { font-size: 1.4rem; margin-right: 15px; flex-shrink: 0;}
 .mech-desc { padding: 15px 15px 15px 62px; font-size: 0.9rem; color: #334155; border-top: 1px dashed #cbd5e1; background: #f8fafc; border-radius: 0 0 8px 8px; line-height: 1.5; font-weight: 500;}
 
-/* Cuadrícula interna (para Pilar 3 CMP) */
+/* Cuadrícula interna */
 .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%;}
 .grid-item { background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; border-top: 4px solid; }
 
@@ -1389,30 +1389,3 @@ elif seccion == "♻️ 5. Pilar Sostenibilidad":
 </div>
 '''
         st.markdown(html_linea, unsafe_allow_html=True)
-"""
-
-with open("app_tablero_maestro_corregido_final_v23.py", "w", encoding="utf-8") as f:
-    f.write(codigo_app)
-
-print("Instalando librerías...")
-os.system("pip install streamlit pandas plotly -q")
-
-os.system("pkill -9 streamlit")
-time.sleep(2)
-
-print("Iniciando el Tablero Gerencial por el puerto 8555...")
-comando = [
-    sys.executable, "-m", "streamlit", "run", "app_tablero_maestro_corregido_final_v23.py", 
-    "--server.port=8555", 
-    "--server.address=0.0.0.0", 
-    "--server.enableCORS=false", 
-    "--server.enableXsrfProtection=false"
-]
-subprocess.Popen(comando)
-time.sleep(5)
-
-enlace_directo = output.eval_js("google.colab.kernel.proxyPort(8555)")
-print("==================================================================")
-print("✅ TABLERO INTEGRADO Y LISTO AL 100%. HAZ CLIC EN EL ENLACE:")
-print(enlace_directo)
-print("==================================================================")
