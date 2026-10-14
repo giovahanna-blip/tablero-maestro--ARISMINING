@@ -48,16 +48,16 @@ details.tarjeta-btn[open] .click-hint { display: none; }
 .expanded-content { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #d1d5db; font-size: 0.8rem; color: #4b5563; font-weight: 600; line-height: 1.3; }
 
 /* Botones KPI Ambientales Interactivos */
-details.kpi-btn { flex: 1; min-width: 220px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px 15px; text-align: center; transition: all 0.2s ease-in-out; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-details.kpi-btn:hover { transform: translateY(-4px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); border-color: #10b981; }
+details.kpi-btn { flex: 1; min-width: 140px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 15px 10px; text-align: center; transition: all 0.2s ease-in-out; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+details.kpi-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.08); border-color: #10b981; }
 details.kpi-btn summary { list-style: none; outline: none; }
 details.kpi-btn summary::-webkit-details-marker { display: none; }
-.kpi-btn-title { font-size: 1.05em; color: #374151; margin-bottom: 5px; font-weight: 700; line-height: 1.3;}
-.kpi-btn-value { font-size: 2.8em; font-weight: 800; color: #1E3A8A; margin: 10px 0; line-height: 1.1; }
-.kpi-btn-delta { font-size: 0.85em; padding: 6px 14px; border-radius: 20px; display: inline-block; font-weight: 700; border: 1px solid #bbf7d0; background-color: #d1fae5; color: #065f46;}
-.click-hint-kpi { font-size: 0.7rem; color: #6b7280; margin-top: 15px; font-weight: 600; background: #f3f4f6; border-radius: 10px; padding: 4px 10px; display: inline-block;}
+.kpi-btn-title { font-size: 0.95rem; color: #4b5563; margin-bottom: 5px; font-weight: 600; }
+.kpi-btn-value { font-size: 2rem; font-weight: 800; color: #1e3a8a; margin: 10px 0; line-height: 1.1; }
+.kpi-btn-delta { font-size: 0.85rem; padding: 5px 12px; border-radius: 20px; display: inline-block; font-weight: 700; background-color: #d1fae5; color: #065f46;}
+.click-hint-kpi { font-size: 0.75rem; color: #6b7280; margin-top: 10px; font-weight: 600; background: #f3f4f6; border-radius: 10px; padding: 3px 8px; display: inline-block;}
 details.kpi-btn[open] .click-hint-kpi { display: none; }
-.expanded-content-kpi { margin-top: 15px; padding-top: 12px; border-top: 1px dashed #d1d5db; font-size: 0.85rem; color: #4b5563; font-weight: 500; line-height: 1.4; }
+.expanded-content-kpi { margin-top: 12px; padding-top: 10px; border-top: 1px dashed #d1d5db; font-size: 0.82rem; color: #374151; font-weight: 500; line-height: 1.4; text-align: left; }
 
 .panel-kpi { background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 20px; text-align: center; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;}
 .circulo-kpi { border: 5px solid #00a651; border-radius: 50%; width: 95px; height: 90px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 800; color: #00a651; margin-bottom: 12px; background: white;}
@@ -353,7 +353,6 @@ if seccion == "🚀 Inicio: Relevancia de la Estrategia":
 
 <div class="grid-infra">
 
-<!-- NÚCLEO CENTRAL CIRCULAR -->
 <div class="donut-wrapper">
 <div class="donut-chart">
 <div class="donut-inner">
@@ -379,7 +378,6 @@ if seccion == "🚀 Inicio: Relevancia de la Estrategia":
 </div>
 </div>
 
-<!-- TARJETAS -->
 <div class="info-card ic-1">
 <div class="card-header"><div class="card-num-box bg-1">1</div><h3 class="card-title tc-1">Análisis y Contexto Territorial</h3></div>
 <p style="font-size: 0.85rem; color:#64748b; margin-top:0;">Ambiental, Social, Económico (Datos y evidencia).</p>
@@ -453,7 +451,6 @@ if seccion == "🚀 Inicio: Relevancia de la Estrategia":
 </div>
 '''
     st.markdown(html_hero, unsafe_allow_html=True)
-
 
 # =========================================================
 # PÁGINA 0: RESUMEN EJECUTIVO 
@@ -616,38 +613,68 @@ elif seccion == "🌿 1. Pilar Ambiental":
 
         st.markdown('''<br>''', unsafe_allow_html=True)
         st.markdown('''### 🛡️ Potencial de Mitigación por Componente''')
+        
         html_potencial = '''
         <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <div style="flex:1; min-width: 140px; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; text-align: center; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                <div style="font-size: 0.95rem; color: #4b5563; font-weight: 600; margin-bottom: 10px;">Agua</div>
-                <div style="font-size: 2rem; color: #1e3a8a; font-weight: 800; margin-bottom: 15px;">-74</div>
-                <div style="background: #d1fae5; color: #065f46; font-size: 0.85rem; font-weight: 700; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 15px;">+4 pts recup.</div><br>
-                <div style="font-size: 0.8rem; color: #6b7280; font-weight:600; cursor: pointer;">▶ <span style="color:#ef4444;">❓</span> Ver medida</div>
-            </div>
-            <div style="flex:1; min-width: 140px; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; text-align: center; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                <div style="font-size: 0.95rem; color: #4b5563; font-weight: 600; margin-bottom: 10px;">Aire</div>
-                <div style="font-size: 2rem; color: #1e3a8a; font-weight: 800; margin-bottom: 15px;">-46</div>
-                <div style="background: #d1fae5; color: #065f46; font-size: 0.85rem; font-weight: 700; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 15px;">+24 pts recup.</div><br>
-                <div style="font-size: 0.8rem; color: #6b7280; font-weight:600; cursor: pointer;">▶ <span style="color:#ef4444;">❓</span> Ver medida</div>
-            </div>
-            <div style="flex:1; min-width: 140px; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; text-align: center; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                <div style="font-size: 0.95rem; color: #4b5563; font-weight: 600; margin-bottom: 10px;">Paisaje</div>
-                <div style="font-size: 2rem; color: #1e3a8a; font-weight: 800; margin-bottom: 15px;">-58</div>
-                <div style="background: #d1fae5; color: #065f46; font-size: 0.85rem; font-weight: 700; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 15px;">+19 pts recup.</div><br>
-                <div style="font-size: 0.8rem; color: #6b7280; font-weight:600; cursor: pointer;">▶ <span style="color:#ef4444;">❓</span> Ver medida</div>
-            </div>
-            <div style="flex:1; min-width: 140px; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; text-align: center; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                <div style="font-size: 0.95rem; color: #4b5563; font-weight: 600; margin-bottom: 10px;">Ruido</div>
-                <div style="font-size: 2rem; color: #1e3a8a; font-weight: 800; margin-bottom: 15px;">-46</div>
-                <div style="background: #d1fae5; color: #065f46; font-size: 0.85rem; font-weight: 700; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 15px;">+24 pts recup.</div><br>
-                <div style="font-size: 0.8rem; color: #6b7280; font-weight:600; cursor: pointer;">▶ <span style="color:#ef4444;">❓</span> Ver medida</div>
-            </div>
-            <div style="flex:1; min-width: 140px; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; text-align: center; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                <div style="font-size: 0.95rem; color: #4b5563; font-weight: 600; margin-bottom: 10px;">Suelo</div>
-                <div style="font-size: 2rem; color: #1e3a8a; font-weight: 800; margin-bottom: 15px;">-58</div>
-                <div style="background: #d1fae5; color: #065f46; font-size: 0.85rem; font-weight: 700; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 15px;">+22 pts recup.</div><br>
-                <div style="font-size: 0.8rem; color: #6b7280; font-weight:600; cursor: pointer;">▶ <span style="color:#ef4444;">❓</span> Ver medida</div>
-            </div>
+            <details class="kpi-btn">
+                <summary>
+                    <div class="kpi-btn-title">Agua</div>
+                    <div class="kpi-btn-value">-74</div>
+                    <div class="kpi-btn-delta">+4 pts recup.</div><br>
+                    <div class="click-hint-kpi">▶ Ver medida</div>
+                </summary>
+                <div class="expanded-content-kpi">
+                    <b>Medida de Manejo:</b> Construcción de plantas de tratamiento de vertimientos (PTAR) e inventario hídrico en quebradas críticas.
+                </div>
+            </details>
+            
+            <details class="kpi-btn">
+                <summary>
+                    <div class="kpi-btn-title">Aire</div>
+                    <div class="kpi-btn-value">-46</div>
+                    <div class="kpi-btn-delta">+24 pts recup.</div><br>
+                    <div class="click-hint-kpi">▶ Ver medida</div>
+                </summary>
+                <div class="expanded-content-kpi">
+                    <b>Medida de Manejo:</b> Humectación de vías operativas, pavimentación de tramos críticos y cerramientos anti-polvo.
+                </div>
+            </details>
+
+            <details class="kpi-btn">
+                <summary>
+                    <div class="kpi-btn-title">Paisaje</div>
+                    <div class="kpi-btn-value">-58</div>
+                    <div class="kpi-btn-delta">+19 pts recup.</div><br>
+                    <div class="click-hint-kpi">▶ Ver medida</div>
+                </summary>
+                <div class="expanded-content-kpi">
+                    <b>Medida de Manejo:</b> Conformación de taludes, revegetación progresiva y barreras forestales perimetrales.
+                </div>
+            </details>
+
+            <details class="kpi-btn">
+                <summary>
+                    <div class="kpi-btn-title">Ruido</div>
+                    <div class="kpi-btn-value">-46</div>
+                    <div class="kpi-btn-delta">+24 pts recup.</div><br>
+                    <div class="click-hint-kpi">▶ Ver medida</div>
+                </summary>
+                <div class="expanded-content-kpi">
+                    <b>Medida de Manejo:</b> Aislamiento acústico en plantas de beneficio, control de horarios de transporte y mantenimiento de maquinaria.
+                </div>
+            </details>
+
+            <details class="kpi-btn">
+                <summary>
+                    <div class="kpi-btn-title">Suelo</div>
+                    <div class="kpi-btn-value">-58</div>
+                    <div class="kpi-btn-delta">+22 pts recup.</div><br>
+                    <div class="click-hint-kpi">▶ Ver medida</div>
+                </summary>
+                <div class="expanded-content-kpi">
+                    <b>Medida de Manejo:</b> Control de escorrentía, estabilización de laderas y manejo adecuado de estériles y relaves.
+                </div>
+            </details>
         </div>
         '''
         st.markdown(html_potencial, unsafe_allow_html=True)
@@ -1028,7 +1055,6 @@ elif seccion == "🤝 2. Pilar Social y Económico":
         st.markdown('''<span style='font-size: 0.9rem; color: #4b5563;'>Cruce analítico entre la urgencia de necesidades locales y el nivel de reconocimiento de gestión.</span>''', unsafe_allow_html=True)
         st.divider()
 
-        # 1. Gráfico de Barras Estilo Infográfico interactivo
         st.markdown('''#### 🗣️ ¿Qué está pidiendo el territorio?''')
         
         fig_bar = go.Figure()
@@ -1070,7 +1096,6 @@ elif seccion == "🤝 2. Pilar Social y Económico":
         
         st.divider()
         
-        # 2. Matriz de Oportunidades 
         st.markdown('''#### 🔲 Matriz de Oportunidad Territorial''')
         
         col_matriz, col_cats = st.columns([2.8, 1])
