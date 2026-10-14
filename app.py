@@ -464,7 +464,7 @@ elif seccion == "📊 0. Resumen Ejecutivo (Hoja de Ruta)":
 <div class="kpi-card"><div class="kpi-title">Acciones Críticas</div><div class="kpi-value">9</div><div class="kpi-delta delta-red">Atención Inmediata</div></div>
 <div class="kpi-card"><div class="kpi-title">Actores Clave</div><div class="kpi-value">6</div><div class="kpi-delta delta-orange">Entidades Directas</div></div>
 </div>
-    '''
+'''
     st.markdown(kpi_html, unsafe_allow_html=True)
     st.divider()
     
@@ -556,20 +556,20 @@ elif seccion == "🌿 1. Pilar Ambiental":
     
     if pestaña_p1 in ["📉 Impacto Global", "🔍 Desglose por Componente"]:
         st.sidebar.markdown('''
-        <div style="background-color: #e0f2fe; padding: 15px; border-radius: 8px; border: 1px solid #bae6fd; font-size: 0.9em; margin-top: 15px;">
-            <p style="margin-bottom: 10px; color: #0369a1; font-weight: bold;">💡 Diccionario CONESA:</p>
-            <p style="margin-bottom: 6px;"><b>IN:</b> Intensidad</p>
-            <p style="margin-bottom: 6px;"><b>EX:</b> Extensión</p>
-            <p style="margin-bottom: 6px;"><b>MO:</b> Momento</p>
-            <p style="margin-bottom: 6px;"><b>PE:</b> Persistencia</p>
-            <p style="margin-bottom: 6px;"><b>RV:</b> Reversibilidad</p>
-            <p style="margin-bottom: 6px;"><b>SI:</b> Sinergia</p>
-            <p style="margin-bottom: 6px;"><b>AC:</b> Acumulación</p>
-            <p style="margin-bottom: 6px;"><b>EF:</b> Efecto</p>
-            <p style="margin-bottom: 6px;"><b>PR:</b> Periodicidad</p>
-            <p style="margin-bottom: 0px;"><b>MC:</b> Recuperabilidad</p>
-        </div>
-        ''', unsafe_allow_html=True)
+<div style="background-color: #e0f2fe; padding: 15px; border-radius: 8px; border: 1px solid #bae6fd; font-size: 0.9em; margin-top: 15px;">
+<p style="margin-bottom: 10px; color: #0369a1; font-weight: bold;">💡 Diccionario CONESA:</p>
+<p style="margin-bottom: 6px;"><b>IN:</b> Intensidad</p>
+<p style="margin-bottom: 6px;"><b>EX:</b> Extensión</p>
+<p style="margin-bottom: 6px;"><b>MO:</b> Momento</p>
+<p style="margin-bottom: 6px;"><b>PE:</b> Persistencia</p>
+<p style="margin-bottom: 6px;"><b>RV:</b> Reversibilidad</p>
+<p style="margin-bottom: 6px;"><b>SI:</b> Sinergia</p>
+<p style="margin-bottom: 6px;"><b>AC:</b> Acumulación</p>
+<p style="margin-bottom: 6px;"><b>EF:</b> Efecto</p>
+<p style="margin-bottom: 6px;"><b>PR:</b> Periodicidad</p>
+<p style="margin-bottom: 0px;"><b>MC:</b> Recuperabilidad</p>
+</div>
+''', unsafe_allow_html=True)
 
     st.divider()
 
@@ -615,68 +615,68 @@ elif seccion == "🌿 1. Pilar Ambiental":
         st.markdown('''### 🛡️ Potencial de Mitigación por Componente''')
         
         html_potencial = '''
-        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <details class="kpi-btn">
-                <summary>
-                    <div class="kpi-btn-title">Agua</div>
-                    <div class="kpi-btn-value">-74</div>
-                    <div class="kpi-btn-delta">+4 pts recup.</div><br>
-                    <div class="click-hint-kpi">▶ Ver medida</div>
-                </summary>
-                <div class="expanded-content-kpi">
-                    <b>Medida de Manejo:</b> Construcción de plantas de tratamiento de vertimientos (PTAR) e inventario hídrico en quebradas críticas.
-                </div>
-            </details>
-            
-            <details class="kpi-btn">
-                <summary>
-                    <div class="kpi-btn-title">Aire</div>
-                    <div class="kpi-btn-value">-46</div>
-                    <div class="kpi-btn-delta">+24 pts recup.</div><br>
-                    <div class="click-hint-kpi">▶ Ver medida</div>
-                </summary>
-                <div class="expanded-content-kpi">
-                    <b>Medida de Manejo:</b> Humectación de vías operativas, pavimentación de tramos críticos y cerramientos anti-polvo.
-                </div>
-            </details>
+<div style="display: flex; gap: 15px; flex-wrap: wrap;">
+<details class="kpi-btn">
+<summary>
+<div class="kpi-btn-title">Agua</div>
+<div class="kpi-btn-value">-74</div>
+<div class="kpi-btn-delta">+4 pts recup.</div><br>
+<div class="click-hint-kpi">▶ Ver medida</div>
+</summary>
+<div class="expanded-content-kpi">
+<b>Medida de Manejo:</b> Construcción de plantas de tratamiento de vertimientos (PTAR) e inventario hídrico en quebradas críticas.
+</div>
+</details>
 
-            <details class="kpi-btn">
-                <summary>
-                    <div class="kpi-btn-title">Paisaje</div>
-                    <div class="kpi-btn-value">-58</div>
-                    <div class="kpi-btn-delta">+19 pts recup.</div><br>
-                    <div class="click-hint-kpi">▶ Ver medida</div>
-                </summary>
-                <div class="expanded-content-kpi">
-                    <b>Medida de Manejo:</b> Conformación de taludes, revegetación progresiva y barreras forestales perimetrales.
-                </div>
-            </details>
+<details class="kpi-btn">
+<summary>
+<div class="kpi-btn-title">Aire</div>
+<div class="kpi-btn-value">-46</div>
+<div class="kpi-btn-delta">+24 pts recup.</div><br>
+<div class="click-hint-kpi">▶ Ver medida</div>
+</summary>
+<div class="expanded-content-kpi">
+<b>Medida de Manejo:</b> Humectación de vías operativas, pavimentación de tramos críticos y cerramientos anti-polvo.
+</div>
+</details>
 
-            <details class="kpi-btn">
-                <summary>
-                    <div class="kpi-btn-title">Ruido</div>
-                    <div class="kpi-btn-value">-46</div>
-                    <div class="kpi-btn-delta">+24 pts recup.</div><br>
-                    <div class="click-hint-kpi">▶ Ver medida</div>
-                </summary>
-                <div class="expanded-content-kpi">
-                    <b>Medida de Manejo:</b> Aislamiento acústico en plantas de beneficio, control de horarios de transporte y mantenimiento de maquinaria.
-                </div>
-            </details>
+<details class="kpi-btn">
+<summary>
+<div class="kpi-btn-title">Paisaje</div>
+<div class="kpi-btn-value">-58</div>
+<div class="kpi-btn-delta">+19 pts recup.</div><br>
+<div class="click-hint-kpi">▶ Ver medida</div>
+</summary>
+<div class="expanded-content-kpi">
+<b>Medida de Manejo:</b> Conformación de taludes, revegetación progresiva y barreras forestales perimetrales.
+</div>
+</details>
 
-            <details class="kpi-btn">
-                <summary>
-                    <div class="kpi-btn-title">Suelo</div>
-                    <div class="kpi-btn-value">-58</div>
-                    <div class="kpi-btn-delta">+22 pts recup.</div><br>
-                    <div class="click-hint-kpi">▶ Ver medida</div>
-                </summary>
-                <div class="expanded-content-kpi">
-                    <b>Medida de Manejo:</b> Control de escorrentía, estabilización de laderas y manejo adecuado de estériles y relaves.
-                </div>
-            </details>
-        </div>
-        '''
+<details class="kpi-btn">
+<summary>
+<div class="kpi-btn-title">Ruido</div>
+<div class="kpi-btn-value">-46</div>
+<div class="kpi-btn-delta">+24 pts recup.</div><br>
+<div class="click-hint-kpi">▶ Ver medida</div>
+</summary>
+<div class="expanded-content-kpi">
+<b>Medida de Manejo:</b> Aislamiento acústico en plantas de beneficio, control de horarios de transporte y mantenimiento de maquinaria.
+</div>
+</details>
+
+<details class="kpi-btn">
+<summary>
+<div class="kpi-btn-title">Suelo</div>
+<div class="kpi-btn-value">-58</div>
+<div class="kpi-btn-delta">+22 pts recup.</div><br>
+<div class="click-hint-kpi">▶ Ver medida</div>
+</summary>
+<div class="expanded-content-kpi">
+<b>Medida de Manejo:</b> Control de escorrentía, estabilización de laderas y manejo adecuado de estériles y relaves.
+</div>
+</details>
+</div>
+'''
         st.markdown(html_potencial, unsafe_allow_html=True)
 
     elif pestaña_p1 == "🔍 Desglose por Componente":
@@ -801,13 +801,11 @@ La gran barra roja refleja la transformación de la vegetación secundaria (-205
             if corredor_sel == "Conexión 1 ↔ 5 (Sector San Juan)":
                 perfil, esfuerzo, impacto, accion = "Alta Eficiencia Costo-Beneficio", "Bajo / Medio", "Conecta fragmentos rápidamente", "Pasos de fauna rápidos"
                 lats_nodos, lons_nodos = [5.460, 5.455], [-75.610, -75.612]
-                lats_poly, lons_poly = [5.460, 5.455, 5.455, 5.460, 5.460], [-75.6095, -75.6115, -75.6125, -75.6105, -75.6095]
-                centro, color_hex, color_rgba, nombres = {"lat": 5.4575, "lon": -75.6110}, "#3b82f6", "rgba(59, 130, 246, 0.5)", ["Núcleo Boscoso 1", "Núcleo Boscoso 5"]
+                color_hex = "#3b82f6"
             else:
                 perfil, esfuerzo, impacto, accion = "Intervención Estructural Profunda", "Alto (Largo Plazo)", "Aumenta conectividad global 15%", "Restauración forestal pesada"
                 lats_nodos, lons_nodos = [5.478, 5.470], [-75.585, -75.588]
-                lats_poly, lons_poly = [5.478, 5.470, 5.470, 5.478, 5.478], [-75.5845, -75.5875, -75.5885, -75.5855, -75.5845]
-                centro, color_hex, color_rgba, nombres = {"lat": 5.4740, "lon": -75.5865}, "#f97316", "rgba(249, 115, 22, 0.5)", ["Núcleo Boscoso 2", "Núcleo Boscoso 4"]
+                color_hex = "#f97316"
             
             with col_datos:
                 html_corredores = f'''
@@ -829,11 +827,9 @@ La gran barra roja refleja la transformación de la vegetación secundaria (-205
                 st.markdown(html_corredores, unsafe_allow_html=True)
 
             with col_mapa:
-                fig_mapa = go.Figure()
-                fig_mapa.add_trace(go.Scattermapbox(mode="lines", lon=lons_poly, lat=lats_poly, fill="toself", fillcolor=color_rgba, line=dict(width=1, color=color_hex), hoverinfo="none"))
-                fig_mapa.add_trace(go.Scattermapbox(mode="markers", lon=lons_nodos, lat=lats_nodos, marker={'size': 14, 'color': color_hex}, text=nombres, hoverinfo="text"))
-                fig_mapa.update_layout(margin={"r":0,"t":0,"l":0,"b":0}, height=300, mapbox=dict(style="white-bg", center=centro, zoom=14.5, layers=[{"below": 'traces', "sourcetype": "raster", "source": ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"]}]), showlegend=False)
-                st.plotly_chart(fig_mapa, use_container_width=True)
+                # Reemplazo 100% a prueba de todo: Mapa Nativo de Streamlit
+                df_mapa = pd.DataFrame({"lat": lats_nodos, "lon": lons_nodos})
+                st.map(df_mapa, color=color_hex, zoom=14)
 
 # =========================================================
 # PILAR 2: SOCIAL Y ECONÓMICO
@@ -1269,7 +1265,7 @@ elif seccion == "⚖️ 3. Pilar Gobernanza":
 <b>4.</b> La planta de beneficio es el cuello de botella crítico del oro.<br>
 <b>5.</b> La trazabilidad debe empezar en la mina, no en la exportación.<br>
 <b>6.</b> La organización colectiva reduce costos y mejora control.<br>
-<b>7.</b> La fiscalización debe combinar incentivos y sanciones.<br>
+<b>7.</b> La fiscalización ডান combinar incentivos y sanciones.<br>
 <b>8.</b> Diferenciar tipos de mineros (no todos son iguales).<br>
 <b>9.</b> El enfoque territorial y de uso de suelo es indispensable.<br>
 <b>10.</b> El éxito requiere permanencia institucional, no solo "pilotos".
