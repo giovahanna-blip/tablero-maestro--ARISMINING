@@ -77,7 +77,6 @@ details.kpi-btn[open] .click-hint-kpi { display: none; }
 .rel-left blockquote { font-style: italic; font-weight: 600; border-left: 4px solid rgba(255,255,255,0.6); padding-left: 15px; margin-top: 25px; color: rgba(255,255,255,0.95);}
 .rel-right { background: #ffffff; flex: 2.5; padding: 30px; display: flex; flex-direction: column; justify-content: center;}
 
-/* Contenedores de botones Pilar 5 */
 .rel-obj-container { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap;}
 .rel-obj { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; flex: 1; text-align: center; min-width: 130px;}
 .rel-obj-num { width: 30px; height: 30px; border-radius: 50%; background: #3b82f6; color: white; font-weight: bold; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto; }
@@ -164,7 +163,8 @@ details.kpi-btn[open] .click-hint-kpi { display: none; }
 .a4 { top: 62%; left: 12%; transform: translate(-50%, -50%) rotate(252deg); }
 .a5 { top: 17%; left: 28%; transform: translate(-50%, -50%) rotate(324deg); }
 
-.info-card { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.06); position: relative; transition: all 0.3s ease; border-top: 6px solid; }
+/* AJUSTE CLAVE: Tarjetas dinámicas que no se cortan */
+.info-card { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.06); position: relative; transition: all 0.3s ease; border-top: 6px solid; height: auto !important; overflow: visible !important; word-wrap: break-word; }
 .info-card:hover { transform: translateY(-5px); box-shadow: 0 20px 35px rgba(0,0,0,0.12); z-index: 20; }
 .ic-1 { border-top-color: #3b82f6; grid-column: 1; grid-row: 1; }
 .ic-2 { border-top-color: #ef4444; grid-column: 3; grid-row: 1; }
@@ -179,7 +179,9 @@ details.kpi-btn[open] .click-hint-kpi { display: none; }
 .card-details summary { font-weight: 700; cursor: pointer; padding: 12px 15px; border-radius: 8px; outline: none; list-style: none; transition: background 0.2s; display: flex; align-items: center; font-size: 0.9rem;}
 .card-details summary::-webkit-details-marker { display: none; }
 .card-details[open] summary { margin-bottom: 10px; }
-.card-body { padding: 15px; font-size: 0.85rem; line-height: 1.6; font-weight: 500; border-radius: 8px; border: 1px dashed; }
+
+/* AJUSTE CLAVE: Cuerpo de la tarjeta responsivo */
+.card-body { padding: 15px; font-size: 0.85rem; line-height: 1.6; font-weight: 500; border-radius: 8px; border: 1px dashed; height: auto !important; overflow: visible !important; word-wrap: break-word;}
 
 .bg-1 { background: #3b82f6; } .tc-1 { color: #1e40af; } .sum-1 { background: #eff6ff; color: #2563eb; } .bod-1 { background: #f8fafc; border-color: #bfdbfe; color: #334155; }
 .bg-2 { background: #ef4444; } .tc-2 { color: #991b1b; } .sum-2 { background: #fef2f2; color: #dc2626; } .bod-2 { background: #fff5f5; border-color: #fecaca; color: #334155; }
@@ -187,6 +189,7 @@ details.kpi-btn[open] .click-hint-kpi { display: none; }
 .bg-4 { background: #f59e0b; } .tc-4 { color: #92400e; } .sum-4 { background: #fffbeb; color: #d97706; } .bod-4 { background: #fefce8; border-color: #fde68a; color: #334155; }
 .bg-5 { background: #10b981; } .tc-5 { color: #064e3b; } .sum-5 { background: #d1fae5; color: #059669; } .bod-5 { background: #f0fdf4; border-color: #a7f3d0; color: #334155; }
 
+/* AJUSTE CLAVE: Responsividad móvil mejorada */
 @media (max-width: 1024px) {
     .grid-infra { grid-template-columns: 1fr; grid-template-rows: auto; }
     .donut-wrapper { grid-column: 1; grid-row: 1; margin-bottom: 20px;}
@@ -195,6 +198,9 @@ details.kpi-btn[open] .click-hint-kpi { display: none; }
     .ic-4 { grid-column: 1; grid-row: 4; }
     .ic-3 { grid-column: 1; grid-row: 5; }
     .ic-5 { grid-column: 1; grid-row: 6; }
+    /* Permitir que la tarjeta se estire y gane espacio en celulares */
+    .info-card { padding: 15px; height: auto !important; overflow: visible !important; }
+    .card-body { height: auto !important; overflow: visible !important; }
 }
 </style>
 '''
@@ -823,9 +829,6 @@ La gran barra roja refleja la transformación de la vegetación secundaria (-205
                 st.markdown(html_corredores, unsafe_allow_html=True)
 
             with col_mapa:
-                # ==========================================
-                # MAPA A PRUEBA DE TODO CON PYDECK (FRANJA / POLÍGONO SATELITAL)
-                # ==========================================
                 coords = [[lon, lat] for lon, lat in zip(lons_poly, lats_poly)]
                 df_poly = pd.DataFrame({"coordinates": [coords]})
                 
@@ -1361,7 +1364,7 @@ elif seccion == "♻️ 5. Pilar Sostenibilidad":
 <div class="rel-obj">
 <div class="rel-obj-num">1</div>
 <div class="rel-obj-title">Entender y priorizar</div>
-<div class="rel-obj-desc">las necesidades, expectativas y percepciones del territorio y sus actores clave.</div>
+<div class="rel-obj-desc">las necesidades, expectativas y percepciones del territorio y sus actors clave.</div>
 </div>
 <div class="rel-obj">
 <div class="rel-obj-num" style="background:#10b981;">2</div>
