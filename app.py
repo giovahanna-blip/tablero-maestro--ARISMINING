@@ -878,4 +878,576 @@ La gran barra roja refleja la transformación de la vegetación secundaria (-205
 elif seccion == "🤝 2. Pilar Social y Económico":
     st.header('''🤝 Pilar 2: Relacionamiento, Confianza y Economía''')
     
-    tab_actores, tab_balanza, tab_prioridades = st.
+    tab_actores, tab_balanza, tab_prioridades = st.tabs([
+        "🗺️ Mapeo Dinámico de Actores", 
+        "⚖️ Balanza Social (Retos y Potencialidades)", 
+        "🎯 Oportunidades y Prioridades del Territorio"
+    ])
+    
+    with tab_actores:
+        st.markdown('''<p style='color:#4B5563; margin-bottom: 20px; font-size: 1.1em;'>Clasificación estratégica de los grupos de interés de Aris Mining Marmato según su Nivel de Influencia e Impacto.</p>''', unsafe_allow_html=True)
+        
+        datos_actores = pd.DataFrame({
+            'Grupo de Interés': ['Comunidades Mineras', 'Autoridades Locales', 'Comunidades Locales', 'Colaboradores',
+                                 'Autoridades Nacionales', 'Autoridades Regionales', 'Academia y Org.'],
+            'Impacto': [4.8, 4.5, 4.6, 3.5, 1.5, 2.0, 2.0],
+            'Influencia': [4.5, 4.8, 3.8, 3.2, 4.8, 4.2, 2.0],
+            'Cuadrante': ['Relación Cercana', 'Relación Cercana', 'Relación Cercana', 'Relación Cercana',
+                          'Mantener Satisfecho', 'Mantener Satisfecho', 'Monitoreo'],
+            'Icono': ['⛏️', '🏢', '👥', '👷', '🏛️', '🗺️', '🎓'],
+            'Actores': [
+                'CMPs (Porvenir, Kabood, MyC, Asoc. Echandía, Alianza), Mesa Minera, Asomitrama, Guacheros.',
+                'Alcaldía de Marmato, Personería, Concejo, Policía Nacional.',
+                'JACs (9 veredas), Indígenas Cartama, Afro, Asoc. (Mujeres Joyeras, Camacol, LGTBIQA+, Angelitos de Luz).',
+                'Empleados directos, Proveedores y Contratistas locales.',
+                'ANM, MME, DNP, Procuraduría General.',
+                'Gobernación de Caldas, Defensoría, Corpocaldas, ANM PAR.',
+                'IEs locales, Universidades (Caldas, EAN, UAM), Bomberos, Hospital, ESPANC.'
+            ],
+            'Objetivo': [
+                'Formalización, minería segura y coexistencia.',
+                'Confianza, gobernabilidad y desarrollo integral.',
+                'Confianza mediante diálogo e inclusión.',
+                'Cultura de seguridad y cadena ASG.',
+                'Transparencia, seguridad jurídica y apoyo regulatorio.',
+                'Ordenamiento territorial y gestión del riesgo.',
+                'Fortalecer capacidades e innovación.'
+            ],
+            'Aspectos': [
+                '• Reducción conflictos empresarial/tradicional.<br>• Fortalecer modelos de coexistencia minera.<br>• Mejora del desempeño social y ambiental.',
+                '• Gestión de conflictividad social.<br>• Coordinación institucional para el desarrollo territorial.<br>• Apoyo al modelo de coexistencia minera.',
+                '• Identificación temprana de conflictos.<br>• Implementación conjunta de proyectos de inversión social.<br>• Gestión de expectativas.',
+                '• Gestión del clima laboral.<br>• Cultura de seguridad y salud en el trabajo.<br>• Prevención de conflictos laborales.',
+                '• Gestión de cambios regulatorios y normativos.<br>• Seguridad jurídica.<br>• Apoyo modelo de coexistencia y formalización.',
+                '• Gestión del riesgo territorial.<br>• Fortalecimiento institucional.<br>• Coordinación de proyectos estratégicos.<br>• Apoyo a formalización.',
+                '• Identificación de oportunidades de innovación.<br>• Fortalecimiento del conocimiento técnico y ASG.<br>• Construcción de alianzas estratégicas.'
+            ]
+        })
+        
+        col_espacio_izq, col_grafica, col_espacio_der = st.columns([1, 4, 1])
+        
+        with col_grafica:
+            fig_actores = px.scatter(datos_actores, x='Impacto', y='Influencia', color='Cuadrante',
+                                     text='Icono',
+                                     color_discrete_map={'Relación Cercana': '#DC2626', 'Mantener Satisfecho': '#2563EB', 'Monitoreo': '#059669'},
+                                     custom_data=['Grupo de Interés', 'Actores', 'Objetivo', 'Aspectos'])
+            
+            fig_actores.update_traces(
+                marker=dict(size=65, opacity=0.95, line=dict(width=3, color='white')),
+                textfont_size=32, textposition='middle center',
+                hovertemplate="<br><b>%{customdata[0]}</b><br><br><b>Actores:</b> %{customdata[1]}<br><br><b>Objetivo:</b> %{customdata[2]}<br><br><b>Aspectos a Gestionar:</b><br>%{customdata[3]}<extra></extra>"
+            )
+            
+            fig_actores.add_shape(type="rect", x0=3, y0=3, x1=5.2, y1=5.2, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(color="#DC2626", width=2), layer="below")
+            fig_actores.add_shape(type="rect", x0=0, y0=3, x1=3, y1=5.2, fillcolor="rgba(37, 99, 235, 0.15)", line=dict(color="#2563EB", width=2), layer="below")
+            fig_actores.add_shape(type="rect", x0=0, y0=0, x1=3, y1=3, fillcolor="rgba(5, 150, 105, 0.15)", line=dict(color="#059669", width=2), layer="below")
+            fig_actores.add_shape(type="rect", x0=3, y0=0, x1=5.2, y1=3, fillcolor="rgba(217, 119, 6, 0.15)", line=dict(color="#D97706", width=2), layer="below")
+
+            fig_actores.add_hline(y=3, line_dash="dash", line_color="#9CA3AF")
+            fig_actores.add_vline(x=3, line_dash="dash", line_color="#9CA3AF")
+            
+            fig_actores.update_xaxes(range=[0, 5.2], title="<b>Nivel de Impacto Recibido (0 a 5)</b>", gridcolor='white')
+            fig_actores.update_yaxes(range=[0, 5.2], title="<b>Capacidad de Influencia (0 a 5)</b>", gridcolor='white')
+            
+            fig_actores.add_annotation(x=0.1, y=5.1, text="MANTENER SATISFECHO", showarrow=False, font=dict(size=12, color="white", weight="bold"), bgcolor="#2563EB", borderpad=5, bordercolor="#1e40af", borderwidth=1, xanchor='left', yanchor='top')
+            fig_actores.add_annotation(x=3.1, y=5.1, text="RELACIÓN CERCANA", showarrow=False, font=dict(size=12, color="white", weight="bold"), bgcolor="#DC2626", borderpad=5, bordercolor="#991b1b", borderwidth=1, xanchor='left', yanchor='top')
+            fig_actores.add_annotation(x=0.1, y=2.9, text="MONITOREO", showarrow=False, font=dict(size=12, color="white", weight="bold"), bgcolor="#059669", borderpad=5, bordercolor="#065f46", borderwidth=1, xanchor='left', yanchor='top')
+            fig_actores.add_annotation(x=3.1, y=2.9, text="MANTENER INFORMADO", showarrow=False, font=dict(size=12, color="white", weight="bold"), bgcolor="#D97706", borderpad=5, bordercolor="#b45309", borderwidth=1, xanchor='left', yanchor='top')
+            
+            fig_actores.update_layout(height=650, plot_bgcolor='rgba(0,0,0,0)', font=dict(family="Montserrat", color="black"), margin=dict(t=20, l=10, r=10, b=10), showlegend=False)
+            st.plotly_chart(fig_actores, use_container_width=True)
+            
+        st.markdown('''<br>''', unsafe_allow_html=True)
+        st.markdown('''#### 📖 Guía Estratégica de Relacionamiento (Cuadrantes)''')
+        
+        html_quadrants = '''
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; padding-bottom: 20px;">
+<div style="background: white; border: 1px solid #e5e7eb; border-top: 5px solid #2563EB; border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+<details style="cursor: pointer; outline: none;"><summary style="font-weight: 800; color: #1e3a8a; font-size: 1.05rem; list-style: none;">🔵 Mantener Satisfecho</summary>
+<div style="margin-top: 10px; font-size: 0.9rem; color: #4b5563; border-top: 1px dashed #cbd5e1; padding-top: 10px;"><b>(Alta influencia – Bajo impacto)</b><br><br>Grupos con alta capacidad de incidencia sobre decisiones estratégicas y bajo impacto por la operación. Requieren relacionamiento para construir confianza y coordinación institucional.</div></details>
+</div>
+<div style="background: white; border: 1px solid #e5e7eb; border-top: 5px solid #DC2626; border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+<details style="cursor: pointer; outline: none;"><summary style="font-weight: 800; color: #991b1b; font-size: 1.05rem; list-style: none;">🔴 Relación Cercana</summary>
+<div style="margin-top: 10px; font-size: 0.9rem; color: #4b5563; border-top: 1px dashed #cbd5e1; padding-top: 10px;"><b>(Alta influencia – Alto impacto)</b><br><br>Actores con alta capacidad de influir sobre la operación y altos impactos. Prioridad para gestión de riesgos, confianza y desarrollo territorial.</div></details>
+</div>
+<div style="background: white; border: 1px solid #e5e7eb; border-top: 5px solid #059669; border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+<details style="cursor: pointer; outline: none;"><summary style="font-weight: 800; color: #065f46; font-size: 1.05rem; list-style: none;">🟢 Monitoreo Continuo</summary>
+<div style="margin-top: 10px; font-size: 0.9rem; color: #4b5563; border-top: 1px dashed #cbd5e1; padding-top: 10px;"><b>(Baja influencia – Bajo impacto)</b><br><br>Grupos con low influencia y low impacto. Requieren seguimiento continuo para identificar cambios en expectativas o intereses.</div></details>
+</div>
+<div style="background: white; border: 1px solid #e5e7eb; border-top: 5px solid #D97706; border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+<details style="cursor: pointer; outline: none;"><summary style="font-weight: 800; color: #b45309; font-size: 1.05rem; list-style: none;">🟠 Mantener Informado</summary>
+<div style="margin-top: 10px; font-size: 0.9rem; color: #4b5563; border-top: 1px dashed #cbd5e1; padding-top: 10px;"><b>(Baja influencia – Alto impacto)</b><br><br>Grupos con alto impacto por la operación y capacidad de incidencia limitada. Requieren acceso a información oportuna y participación.</div></details>
+</div>
+</div>
+'''
+        st.markdown(html_quadrants, unsafe_allow_html=True)
+
+    with tab_balanza:
+        st.markdown('''### ⚖️ Potencialidades y Retos en el Territorio (La Balanza Social)''')
+        st.markdown('''Síntesis interactiva de los hallazgos en encuestas, entrevistas y cartografía social. *Pica sobre las tarjetas para desplegar los detalles.*''')
+        st.divider()
+
+        col_verde, col_kpi = st.columns([3.5, 1])
+
+        with col_verde:
+            html_verde = '''
+<div class='panel-base'>
+<div class='header-verde'>🚦 1. ACTIVOS DE LEGITIMIDAD / FORTALEZAS Y POTENCIALIDADES</div>
+<div class='tarjetas-container'>
+<details class='tarjeta-btn verde'><summary><div class='t-icono'>🤝</div><div class='t-titulo'>Relacionamiento</div><div class='t-porcentaje-verde'>63%</div><div class='click-hint'>Picar para ver ▼</div></summary><div class='expanded-content'>Aris más abierto al diálogo con la comunidad y autoridades locales.</div></details>
+<details class='tarjeta-btn verde'><summary><div class='t-icono'>💵</div><div class='t-titulo'>Economía</div><div class='t-porcentaje-verde'>67%</div><div class='click-hint'>Picar para ver ▼</div></summary><div class='expanded-content'>Sin Aris el empleo y las obras sociales en el territorio estarían peor.</div></details>
+<details class='tarjeta-btn verde'><summary><div class='t-icono'>👷</div><div class='t-titulo'>Operación y convivencia</div><div class='t-porcentaje-verde'>66%</div><div class='click-hint'>Picar para ver ▼</div></summary><div class='expanded-content'>Se perciben mejoras significativas en seguridad y salud debido a Aris.</div></details>
+<details class='tarjeta-btn verde'><summary><div class='t-icono'>📋</div><div class='t-titulo'>Formalización</div><div class='t-porcentaje-verde'>67%</div><div class='click-hint'>Picar para ver ▼</div></summary><div class='expanded-content'>El modelo de formalización tiene el potencial de transformar Marmato.</div></details>
+<details class='tarjeta-btn verde'><summary><div class='t-icono'>🤝</div><div class='t-titulo'>Coexistencia</div><div class='t-porcentaje-verde'>67%</div><div class='click-hint'>Picar para ver ▼</div></summary><div class='expanded-content'>La relación entre la empresa y la minería tradicional ha mejorado.</div></details>
+</div>
+</div>
+'''
+            st.markdown(html_verde, unsafe_allow_html=True)
+
+        with col_kpi:
+            html_kpi = '''
+<div class='panel-kpi'>
+<div class='circulo-kpi'>53%</div>
+<div class='desc-kpi'>del territorio atribuye el desarrollo actual directamente a Aris Mining.</div>
+</div>
+'''
+            st.markdown(html_kpi, unsafe_allow_html=True)
+
+        st.markdown('''<br>''', unsafe_allow_html=True)
+
+        col_amarillo, col_rojo, col_gi = st.columns([1.6, 1.9, 1])
+
+        with col_amarillo:
+            html_amarillo = '''
+<div class='panel-base'>
+<div class='header-amarillo'>🚦 2. FRICCIONES DE CRECIMIENTO</div>
+
+<div class='tarjetas-container'>
+<details class='tarjeta-btn amarillo'>
+<summary>
+<div class='t-icono'>🏭</div>
+<div class='t-titulo'>El Llano</div>
+<div class='t-presion'>🔴 Presión Alta</div>
+<div class='click-hint'>Picar para ver ▼</div>
+</summary>
+<div class='expanded-content'>Foco de industrialización y relavera.</div>
+</details>
+
+<details class='tarjeta-btn amarillo'>
+<summary>
+<div class='t-icono'>🚚</div>
+<div class='t-titulo'>Echandía</div>
+<div class='t-presion'>🔴 Presión Alta</div>
+<div class='click-hint'>Picar para ver ▼</div>
+</summary>
+<div class='expanded-content'>Problemas de tráfico y movilidad constante.</div>
+</details>
+
+<details class='tarjeta-btn amarillo'>
+<summary>
+<div class='t-icono'>⛏️</div>
+<div class='t-titulo'>Cien Pesos</div>
+<div class='t-presion'>🔴 Presión Alta</div>
+<div class='click-hint'>Picar para ver ▼</div>
+</summary>
+<div class='expanded-content'>Alta concentración de guachería y molinos.</div>
+</details>
+</div>
+
+<div style="font-size: 0.85rem; color: #374151; padding: 0 15px 15px 15px; margin-top: -5px;">
+<p style="margin-bottom: 5px;">• La actividad minera informal atrae población flotante y genera presiones territoriales.</p>
+<p style="margin-bottom: 0;">• Gestión con Alcaldía y otros actores. <strong style="color: #92400e;">Aris no puede sola.</strong></p>
+</div>
+</div>
+'''
+            st.markdown(html_amarillo, unsafe_allow_html=True)
+
+        with col_rojo:
+            html_rojo = '''
+<div class='panel-base'>
+<div class='header-rojo'>🚦 3. RIESGOS OPERATIVOS REPUTACIONALES</div>
+<div class='tarjetas-container'>
+<details class='tarjeta-btn rojo'><summary><div class='t-icono'>👥</div><div class='t-titulo'>Relacionamiento</div><div class='t-porcentaje-rojo'>67%</div><div class='click-hint'>Picar para ver ▼</div></summary><div class='expanded-content'>Percepción de beneficios sociales concentrados en pocas personas.</div></details>
+<details class='tarjeta-btn rojo'><summary><div class='t-icono'>💵</div><div class='t-titulo'>Economía</div><div class='t-porcentaje-rojo'>67%</div><div class='click-hint'>Picar para ver ▼</div></summary><div class='expanded-content'>Inversión social no está totalmente asociada a problemas del territorio.</div></details>
+<details class='tarjeta-btn rojo'><summary><div class='t-icono'>👷</div><div class='t-titulo'>Operación y convivencia</div><div class='t-porcentaje-rojo'>71%</div><div class='click-hint'>Picar para ver ▼</div></summary><div class='expanded-content'>La comunidad exige reglas claras para los procesos de formalización.</div></details>
+<details class='tarjeta-btn rojo'><summary><div class='t-icono'>🍃</div><div class='t-titulo'>Territorio y ambiente</div><div class='t-porcentaje-rojo'>67%</div><div class='click-hint'>Picar para ver ▼</div></summary><div class='expanded-content'>Percibe que el manejo del agua, suelo y paisaje ha empeorado.</div></details>
+</div>
+</div>
+'''
+            st.markdown(html_rojo, unsafe_allow_html=True)
+
+        with col_gi:
+            html_gi = '''
+<div class='gi-container'>
+<div class='gi-titulo'>Percepciones por G.I</div>
+<details class='tarjeta-btn gi'><summary><div style='display:flex; align-items:center; gap:10px;'><span style='font-size:1.2rem;'>👷</span><b style='color:#0087a3; font-size:0.85rem;'>Mineros tradicionales</b></div></summary><div class='expanded-content' style='text-align: left; margin-top:5px; padding-top:5px;'>Esperan y demandan <strong>reglas claras</strong>.</div></details>
+<details class='tarjeta-btn gi'><summary><div style='display:flex; align-items:center; gap:10px;'><span style='font-size:1.2rem;'>👔</span><b style='color:#0087a3; font-size:0.85rem;'>Colab. y Autoridades</b></div></summary><div class='expanded-content' style='text-align: left; margin-top:5px; padding-top:5px;'>Son los más optimistas, <strong>destacan la gestión</strong>.</div></details>
+<details class='tarjeta-btn gi'><summary><div style='display:flex; align-items:center; gap:10px;'><span style='font-size:1.2rem;'>👥</span><b style='color:#0087a3; font-size:0.85rem;'>Hogares y comunidad</b></div></summary><div class='expanded-content' style='text-align: left; margin-top:5px; padding-top:5px;'>Son los <strong>más críticos</strong> de la gestión actual.</div></details>
+</div>
+'''
+            st.markdown(html_gi, unsafe_allow_html=True)
+
+    with tab_prioridades:
+        st.markdown('''#### 🎯 Prioridades y Oportunidades del Territorio''')
+        st.markdown('''<span style='font-size: 0.9rem; color: #4b5563;'>Cruce analítico entre la urgencia de necesidades locales y el nivel de reconocimiento de gestión.</span>''', unsafe_allow_html=True)
+        st.divider()
+
+        st.markdown('''#### 🗣️ ¿Qué está pidiendo el territorio?''')
+        
+        fig_bar = go.Figure()
+        
+        fig_bar.add_trace(go.Bar(
+            x=datos_prioridades['Proporción'],
+            y=datos_prioridades['Temas Prioritarios'],
+            orientation='h',
+            marker_color=datos_prioridades['Color'],
+            text=datos_prioridades['Proporción'].astype(str) + '%',
+            textposition='inside',
+            insidetextanchor='end',
+            textfont=dict(color='white', size=14, weight='bold'),
+            customdata=datos_prioridades[['Tema_Corto', 'Explicacion']],
+            hovertemplate="<b>%{customdata[0]}</b><br>%{customdata[1]}<br><br><b>Proporción: %{x}%</b><extra></extra>"
+        ))
+        
+        fig_bar.add_trace(go.Scatter(
+            x=[18.5] * len(datos_prioridades), 
+            y=datos_prioridades['Temas Prioritarios'],
+            mode='markers+text',
+            marker=dict(size=40, color='#e2e8f0', line=dict(color='white', width=0)),
+            text=datos_prioridades['Orden'],
+            textfont=dict(size=16, color='#1e3a8a', family='Montserrat', weight='bold'),
+            hoverinfo='none'
+        ))
+        
+        fig_bar.update_layout(
+            height=450, 
+            plot_bgcolor='rgba(0,0,0,0)', 
+            xaxis_title="Proporción de Recomendaciones (%)", 
+            yaxis_title="",
+            margin=dict(l=10, r=20, t=20, b=20),
+            showlegend=False
+        )
+        fig_bar.update_xaxes(showgrid=True, gridcolor='#e5e7eb', range=[0, 20])
+        fig_bar.update_yaxes(autorange="reversed", tickfont=dict(size=13)) 
+        st.plotly_chart(fig_bar, use_container_width=True)
+        
+        st.divider()
+        
+        st.markdown('''#### 🔲 Matriz de Oportunidad Territorial''')
+        
+        col_matriz, col_cats = st.columns([2.8, 1])
+        
+        with col_matriz:
+            fig_matrix = go.Figure()
+            
+            for idx, row in datos_matriz.iterrows():
+                fig_matrix.add_trace(go.Scatter(
+                    x=[row['Reconocimiento']],
+                    y=[row['Necesidad']],
+                    mode='markers+text',
+                    marker=dict(size=65, color=row['Color'], opacity=1.0, line=dict(width=3, color='white')),
+                    text=[row['Icono']],
+                    textfont=dict(size=28, color='white'),
+                    name=row['Iniciativa'],
+                    customdata=[[row['Iniciativa'], row['Leyenda']]],
+                    hovertemplate="<b>%{customdata[0]}</b><br>Estado / Porcentaje: <b>%{customdata[1]}</b><extra></extra>"
+                ))
+
+            fig_matrix.add_shape(type="rect", x0=0, x1=5, y0=5, y1=10, fillcolor="rgba(225, 54, 79, 0.1)", line=dict(color="#e1364f", width=2), layer="below")
+            fig_matrix.add_shape(type="rect", x0=5, x1=10, y0=5, y1=10, fillcolor="rgba(40, 167, 69, 0.1)", line=dict(color="#28a745", width=2), layer="below")
+            fig_matrix.add_shape(type="rect", x0=0, x1=5, y0=0, y1=5, fillcolor="rgba(142, 68, 173, 0.1)", line=dict(color="#8e44ad", width=2), layer="below")
+            fig_matrix.add_shape(type="rect", x0=5, x1=10, y0=0, y1=5, fillcolor="rgba(0, 137, 123, 0.1)", line=dict(color="#00897b", width=2), layer="below")
+
+            fig_matrix.add_hline(y=5, line_width=3, line_dash="solid", line_color="white")
+            fig_matrix.add_vline(x=5, line_width=3, line_dash="solid", line_color="white")
+            
+            fig_matrix.add_annotation(x=0.2, y=9.8, text="<b>DESAFÍOS CRÍTICOS</b>", showarrow=False, font=dict(color="white", size=12), bgcolor="#e1364f", borderpad=5, borderwidth=1, bordercolor="white", xanchor='left', yanchor='top')
+            fig_matrix.add_annotation(x=9.8, y=9.8, text="<b>OPORTUNIDADES ESTRATÉGICAS</b>", showarrow=False, font=dict(color="white", size=12), bgcolor="#28a745", borderpad=5, borderwidth=1, bordercolor="white", xanchor='right', yanchor='top')
+            fig_matrix.add_annotation(x=0.2, y=0.2, text="<b>SEGUIMIENTO Y FORTALECIMIENTO</b>", showarrow=False, font=dict(color="white", size=12), bgcolor="#8e44ad", borderpad=5, borderwidth=1, bordercolor="white", xanchor='left', yanchor='bottom')
+            fig_matrix.add_annotation(x=9.8, y=0.2, text="<b>ACTIVOS A CONSOLIDAR</b>", showarrow=False, font=dict(color="white", size=12), bgcolor="#00897b", borderpad=5, borderwidth=1, bordercolor="white", xanchor='right', yanchor='bottom')
+
+            fig_matrix.update_layout(
+                height=600, 
+                plot_bgcolor='rgba(0,0,0,0)', 
+                xaxis_title="← Bajo | Reconocimiento de la contribución de Aris Mining | Alto →", 
+                yaxis_title="← Baja | Necesidad Territorial | Alta →", 
+                showlegend=False,
+                margin=dict(t=20, b=40, l=40, r=20)
+            )
+            fig_matrix.update_xaxes(range=[0, 10], showgrid=False, zeroline=False, showticklabels=False)
+            fig_matrix.update_yaxes(range=[0, 10], showgrid=False, zeroline=False, showticklabels=False)
+            
+            st.plotly_chart(fig_matrix, use_container_width=True)
+
+        with col_cats:
+            html_categorias = '''
+<div style="font-family: Montserrat;">
+<div style="font-weight: 800; font-size: 1rem; color: #1f2937; margin-bottom: 20px; border-bottom: 3px solid #1E3A8A; padding-bottom: 5px;">📘 Mensajes Clave</div>
+
+<details class="cat-btn cat-btn-red">
+<summary>🔴 Desafíos Críticos</summary>
+<div class="cat-content">
+El agua, el ambiente y la convivencia minera son las principales alertas reputacionales. La presión sobre los servicios públicos requiere gestión urgente.
+</div>
+</details>
+
+<details class="cat-btn cat-btn-green">
+<summary>🟢 Op. Estratégicas</summary>
+<div class="cat-content">
+La formalización minera es la gran oportunidad para el territorio. La inclusión de mujeres y jóvenes es clave para la licencia social a largo plazo.
+</div>
+</details>
+
+<details class="cat-btn cat-btn-blue">
+<summary>🔵 Activos a Consolidar</summary>
+<div class="cat-content">
+El empleo generado, las mejoras en seguridad minera y la apertura al diálogo son los mayores activos de legitimidad. Deben mantenerse.
+</div>
+</details>
+
+<details class="cat-btn cat-btn-purple">
+<summary>🟣 Seguimiento</summary>
+<div class="cat-content">
+Aspectos como la cobertura de la inversión social y la infraestructura básica requieren un monitoreo constante para no convertirse en pasivos futuros.
+</div>
+</details>
+
+<div style="margin-top: 30px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 15px; text-align: center;">
+<div style="font-size: 2rem;">👆</div>
+<div style="font-size: 0.8rem; color: #6b7280; font-weight: 600; margin-top: 5px;">Pasa el cursor sobre los íconos o las barras para ver sus detalles interactivos.</div>
+</div>
+</div>
+'''
+            st.markdown(html_categorias, unsafe_allow_html=True)
+
+# =========================================================
+# PILAR 3: GOBERNANZA 
+# =========================================================
+elif seccion == "⚖️ 3. Pilar Gobernanza":
+    st.header('''⚖️ Pilar 3: Gobernanza y Formalización Minera''')
+    st.info('''**Hallazgo Clave:** La formalización es el corazón estratégico. El 71% del territorio exige reglas claras para la convivencia entre la minería empresarial y la tradicional.''')
+    
+    tab_eco, tab_ejes = st.tabs(["⚙️ Modelo Socios Mineros", "🗺️ 6 Brechas y 10 Lecciones (Hoja de Ruta)"])
+    
+    with tab_eco:
+        html_cmp = '''
+<div class="rel-main-container" style="min-height: auto;">
+<div class="rel-left" style="background: #854d0e;">
+<h2>Modelo Socios Mineros</h2>
+<p>Minería con legalidad, oportunidades y desarrollo para el territorio.</p>
+<blockquote style="border-left-color: #fcd34d; color: #fef3c7;">"Una minería responsable fortalece a las personas y construye futuro."</blockquote>
+</div>
+<div class="rel-right" style="padding: 20px;">
+<div style="display:flex; gap:15px; margin-bottom: 20px;">
+<div style="flex:1; background:#f8fafc; padding:15px; border-radius:8px; border:1px solid #e2e8f0; text-align:center;">
+<div style="font-size:2rem; margin-bottom:5px;">✅</div><div style="font-weight:bold; color:#1e3a8a;">Minería Legal</div><div style="font-size:0.8rem; color:#64748b;">Cumplimiento normativo</div>
+</div>
+<div style="flex:1; background:#f8fafc; padding:15px; border-radius:8px; border:1px solid #e2e8f0; text-align:center;">
+<div style="font-size:2rem; margin-bottom:5px;">👷</div><div style="font-weight:bold; color:#1e3a8a;">Minería Segura</div><div style="font-size:0.8rem; color:#64748b;">Mejores prácticas SST</div>
+</div>
+<div style="flex:1; background:#f8fafc; padding:15px; border-radius:8px; border:1px solid #e2e8f0; text-align:center;">
+<div style="font-size:2rem; margin-bottom:5px;">🍃</div><div style="font-weight:bold; color:#1e3a8a;">Minería Responsable</div><div style="font-size:0.8rem; color:#64748b;">Respeto ambiental</div>
+</div>
+</div>
+
+<details class="mech-details"><summary><span class="mech-num" style="background:#10b981;">🌟</span> Fortalezas del Modelo (La Maruja)</summary>
+<div class="mech-desc">
+<ul style="margin-bottom:0;">
+<li><b>Coexistencia Operativa:</b> 4 operadores organizados.</li>
+<li><b>Cadena articulada:</b> Explotación, transporte y beneficio.</li>
+<li><b>Consistencia ambiental:</b> Percolación autorizada.</li>
+<li><b>Aprendizaje:</b> Las prácticas de seguridad minera de Aris son imitadas por iniciativa propia en el territorio.</li>
+</ul>
+</div></details>
+
+<details class="mech-details"><summary><span class="mech-num" style="background:#f59e0b;">⚠️</span> Oportunidades de Mejora</summary>
+<div class="mech-desc">
+<ul style="margin-bottom:0;">
+<li><b>Responsabilidades claras:</b> Evitar dilución titular-operador.</li>
+<li><b>Cumplimiento documentado:</b> Matriz de obligaciones.</li>
+<li><b>Evaluación independiente:</b> Seguridad y trazabilidad.</li>
+<li><b>Replicabilidad:</b> Asegurar condiciones técnicas antes de expandir.</li>
+</ul>
+</div></details>
+</div>
+</div>
+'''
+        st.markdown(html_cmp, unsafe_allow_html=True)
+
+    with tab_ejes:
+        html_ejes = '''
+<div class="rel-main-container" style="min-height: auto;">
+<div class="rel-left" style="background: #1e3a8a;">
+<h2>Brechas y Lecciones</h2>
+<p>La formalización no es solo entregar títulos. Requiere superar barreras estructurales e incorporar buenas prácticas internacionales.</p>
+</div>
+<div class="rel-right" style="padding: 30px;">
+<h4 style="color:#1e3a8a; margin-bottom:15px; font-weight:700;">🚧 6 Brechas de Formalización a superar en Marmato</h4>
+
+<details class="mech-details"><summary><span class="mech-num" style="background:#3b82f6;">1</span><span class="mech-icon">⚖️</span> Brecha Jurídica y Propiedad</summary>
+<div class="mech-desc">Superposición de áreas, conflicto entre catastro (suelo) y títulos (subsuelo). No todas las Unidades Productivas Mineras (UPM) pueden acceder a la misma figura.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#f59e0b;">2</span><span class="mech-icon">⚙️</span> Brecha Técnico-Minera</summary>
+<div class="mech-desc">Falta información técnica del estado real de las labores: reservas remanentes, estabilidad de bocaminas, subsidencia, ventilación y manejo de explosivos.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#10b981;">3</span><span class="mech-icon">🍃</span> Brecha Ambiental</summary>
+<div class="mech-desc">Ausencia de datos integrados para control de vertimientos, disposición de estériles y protección de cuencas en el proceso de formalización colectiva.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#ef4444;">4</span><span class="mech-icon">⚠️</span> Brecha de Gestión del Riesgo</summary>
+<div class="mech-desc">Alta concentración de UPM en zonas de amenaza alta por deslizamiento que requieren estudios geotécnicos preventivos antes de formalizar.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#8b5cf6;">5</span><span class="mech-icon">💰</span> Brecha Económica</summary>
+<div class="mech-desc">Si la formalización se exige como imposición sin conectar financiamiento, beneficio de mineral y comercialización formal, fracasará por costos operativos.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#06b6d4;">6</span><span class="mech-icon">🏛️</span> Brecha Institucional</summary>
+<div class="mech-desc">Leyes avanzadas sin capacidad local. Requiere articulación urgente entre ANM, Alcaldía, Corpocaldas y Aris Mining para no ser un mero "trámite en papel".</div></details>
+
+<div style="margin-top: 25px; padding: 15px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px;">
+<details class="mech-details" style="margin-bottom:0;"><summary><span class="mech-icon">🌎</span> Decálogo de Lecciones Internacionales Aprendidas</summary>
+<div class="mech-desc" style="font-size:0.85rem;">
+<b>1.</b> Formalizar no es solo entregar títulos.<br>
+<b>2.</b> La legalidad debe ser económicamente viable (costos proporcionales).<br>
+<b>3.</b> El comprador formal es tan importante como la autoridad minera.<br>
+<b>4.</b> La planta de beneficio es el cuello de botella crítico del oro.<br>
+<b>5.</b> La trazabilidad debe empezar en la mina, no en la exportación.<br>
+<b>6.</b> La organización colectiva reduce costos y mejora control.<br>
+<b>7.</b> La fiscalización debe combinar incentivos y sanciones.<br>
+<b>8.</b> Diferenciar tipos de mineros (no todos son iguales).<br>
+<b>9.</b> El enfoque territorial y de uso de suelo es indispensable.<br>
+<b>10.</b> El éxito requiere permanencia institucional, no solo "pilotos".
+</div></details>
+</div>
+</div>
+</div>
+'''
+        st.markdown(html_ejes, unsafe_allow_html=True)
+
+# =========================================================
+# PILAR 4: INFORMACIÓN 
+# =========================================================
+elif seccion == "📡 4. Pilar Información":
+    st.header('''📡 Pilar 4: Sistemas de Monitoreo e Información (Centro de Inteligencia Transparente)''')
+    st.markdown('''**Propuesta de Valor:** Para generar impacto real y construir legitimidad, este pilar no debe ser solo un archivo de datos, sino una plataforma de transparencia abierta a la comunidad. Se estructura en tres ejes fundamentales:''')
+    
+    html_p4 = '''
+<div class="rel-main-container">
+<div class="rel-left" style="background: #0f766e;">
+<h2>Centro de Inteligencia Transparente</h2>
+<p>Plataforma abierta para generar legitimidad basada en datos reales, verificables y de acceso comunitario.</p>
+<blockquote style="border-left-color: #5eead4; color: #ccfbf1;">"La transparencia elimina la desconfianza ambiental."</blockquote>
+</div>
+<div class="rel-right" style="padding: 30px;">
+<h4 style="color:#115e59; margin-bottom:15px; font-weight:700;">Ejes de Monitoreo Territorial</h4>
+
+<details class="mech-details"><summary><span class="mech-num" style="background:#0ea5e9;">1</span><span class="mech-icon">💧</span> Monitoreo Participativo (Agua y Aire)</summary>
+<div class="mech-desc">Red continua y en tiempo real en quebradas críticas (Cascabel, Pantanos). Los datos deben ser accesibles y validados junto a la comunidad para eliminar la desconfianza ambiental generada por terceros o impactos acumulativos.</div></details>
+
+<details class="mech-details"><summary><span class="mech-num" style="background:#10b981;">2</span><span class="mech-icon">🗺️</span> SIG Minero-Ambiental (Georreferenciación)</summary>
+<div class="mech-desc">Georreferenciación interactiva de la operación, pasivos ambientales, taludes y subsidencia. Permite identificar zonas de amenaza alta y coordinar acciones de reubicación o mitigación directa con la Alcaldía Municipal y Corpocaldas.</div></details>
+
+<details class="mech-details"><summary><span class="mech-num" style="background:#8b5cf6;">3</span><span class="mech-icon">📊</span> Rendición de Cuentas CSR (Inversión)</summary>
+<div class="mech-desc">Tablero de seguimiento a la Inversión Social (vías, escuelas, alianzas). Trasladar los datos <i>"de la actividad al resultado"</i> para que el territorio verifique el impacto real, el presupuesto y el avance de cada proyecto comunitario.</div></details>
+</div>
+</div>
+'''
+    st.markdown(html_p4, unsafe_allow_html=True)
+
+# =========================================================
+# PILAR 5: SOSTENIBILIDAD
+# =========================================================
+elif seccion == "♻️ 5. Pilar Sostenibilidad":
+    st.header('''♻️ Pilar 5: Sostenibilidad y Creación de Valor''')
+    st.markdown('''Alineación con estándares ASG para priorizar la inversión social, garantizar impactos a largo plazo y construir legitimidad mediante el diálogo.''')
+    
+    tab_rel, tab_prio, tab_linea = st.tabs(["🗣️ Estrategia de Relacionamiento Territorial", "📊 Priorización de Inversión", "⏳ Línea de Tiempo"])
+    
+    with tab_rel:
+        rel_html = '''
+<div class="rel-main-container">
+<div class="rel-left" style="background: #0f3f71;">
+<h2>Estrategia de Relacionamiento Territorial</h2>
+<p>Sistema de identificación temprana de riesgos, gestión de expectativas y construcción de legitimidad en el territorio.</p>
+<blockquote>"El diálogo abre territorios más fuertes."</blockquote>
+</div>
+<div class="rel-right" style="padding: 30px;">
+<div class="rel-obj-container">
+<div class="rel-obj">
+<div class="rel-obj-num">1</div>
+<div class="rel-obj-title">Entender y priorizar</div>
+<div class="rel-obj-desc">las necesidades, expectativas y percepciones del territorio y sus actors clave.</div>
+</div>
+<div class="rel-obj">
+<div class="rel-obj-num" style="background:#10b981;">2</div>
+<div class="rel-obj-title" style="color:#047857;">Gestionar y documentar</div>
+<div class="rel-obj-desc">los procesos de gestión de impactos e inversión social en el territorio.</div>
+</div>
+<div class="rel-obj">
+<div class="rel-obj-num" style="background:#f59e0b;">3</div>
+<div class="rel-obj-title" style="color:#b45309;">Medir la percepción</div>
+<div class="rel-obj-desc">de Aris en el territorio en el mediano y largo plazo.</div>
+</div>
+</div>
+<h4 style="color:#1e3a8a; margin-bottom:15px; font-weight:700;">Mecanismos de relacionamiento</h4>
+<details class="mech-details"><summary><span class="mech-num" style="background:#3b82f6;">1</span><span class="mech-icon">💧</span> Mesa ambiental y del agua</summary>
+<div class="mech-desc">Monitorear el agua y el ambiente, revisando impactos, indicadores y compromisos.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#10b981;">2</span><span class="mech-icon">🚚</span> Comité de movilidad y transporte</summary>
+<div class="mech-desc">Seguimiento a rutas y horarios para prevenir impactos viales, polvo y ruido.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#f59e0b;">3</span><span class="mech-icon">👥</span> Ciclo de diálogo con JAC</summary>
+<div class="mech-desc">Recoger aportes de las comunidades frente a proyectos e intervenciones.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#ef4444;">4</span><span class="mech-icon">📋</span> Mecanismo de PQRS</summary>
+<div class="mech-desc">Recibir, responder y cerrar casos con trazabilidad y análisis de tendencias.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#8b5cf6;">5</span><span class="mech-icon">🗣️</span> Espacios de socialización</summary>
+<div class="mech-desc">Priorizar compromisos, informar avances y recoger retroalimentación de la gestión.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#06b6d4;">6</span><span class="mech-icon">⚙️</span> Convenios de verificación técnica</summary>
+<div class="mech-desc">Evaluación independiente de impactos y compromisos para fortalecer credibilidad.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#f97316;">7</span><span class="mech-icon">📊</span> Rendición pública de cuentas</summary>
+<div class="mech-desc">Transparentar los avances y resultados de la inversión social y desarrollo de proyectos.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#0284c7;">8</span><span class="mech-icon">🔍</span> Medición de percepciones</summary>
+<div class="mech-desc">Identificar brechas, ajustar la gestión y hacer seguimiento a su evolución.</div></details>
+</div>
+</div>
+'''
+        st.markdown(rel_html, unsafe_allow_html=True)
+    
+    with tab_prio:
+        html_prio = '''
+<div class="rel-main-container" style="min-height: auto;">
+<div class="rel-left" style="background: #1d4ed8;">
+<h2>Priorización de la Inversión</h2>
+<p>Invertir con sentido territorial hoy, construye oportunidades reales mañana.</p>
+<blockquote style="border-left-color: #93c5fd; color: #dbeafe;">"Priorizar es multiplicar el impacto."</blockquote>
+</div>
+<div class="rel-right" style="padding: 30px;">
+<details class="mech-details"><summary><span class="mech-num" style="background:#3b82f6;">1</span><span class="mech-icon">🎯</span> Responde a Necesidades Reales</summary>
+<div class="mech-desc">Se basa en diagnósticos ambientales, sociales, económicos y de gobernanza del territorio.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#10b981;">2</span><span class="mech-icon">📈</span> Genera Mayor Impacto y Efectividad</summary>
+<div class="mech-desc">Concentra esfuerzos en proyectos que producen resultados medibles y sostenibles.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#f59e0b;">3</span><span class="mech-icon">💰</span> Optimiza el Uso de los Recursos</summary>
+<div class="mech-desc">Prioriza iniciativas viables y estratégicas, evitando la dispersión de esfuerzos.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#ef4444;">4</span><span class="mech-icon">🤝</span> Fortalece la Confianza y la Legitimidad</summary>
+<div class="mech-desc">Responde a las expectativas de las comunidades y se construye con participación y transparencia.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#8b5cf6;">5</span><span class="mech-icon">🌱</span> Contribuye a la Sostenibilidad del Negocio</summary>
+<div class="mech-desc">Reduce riesgos sociales, fortalece la licencia social y crea condiciones para la continuidad operativa.</div></details>
+</div>
+</div>
+'''
+        st.markdown(html_prio, unsafe_allow_html=True)
+
+    with tab_linea:
+        html_linea = '''
+<div class="rel-main-container" style="min-height: auto;">
+<div class="rel-left" style="background: #4338ca;">
+<h2>Hoja de Ruta y Línea de Tiempo</h2>
+<p>Relaciones que hoy construyen territorios sostenibles mañana.</p>
+<blockquote style="border-left-color: #a5b4fc; color: #e0e7ff;">"Avanzar juntos es hacer posible un territorio con más oportunidades."</blockquote>
+</div>
+<div class="rel-right" style="padding: 30px;">
+<details class="mech-details"><summary><span class="mech-num" style="background:#3b82f6;">1</span><span class="mech-icon">🔍</span> Corto Plazo (0-1 Año): Conocer y Priorizar</summary>
+<div class="mech-desc">Entender el territorio, sus actores y necesidades clave. Diagnóstico y escucha activa como base de la acción.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#10b981;">2</span><span class="mech-icon">👥</span> Mediano Plazo (1-3 Años): Construir Juntos</summary>
+<div class="mech-desc">Diseñar e implementar iniciativas con participación del territorio. Corresponsabilidad y alianzas para el desarrollo.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#f59e0b;">3</span><span class="mech-icon">⚙️</span> Mediano Plazo (1-3 Años): Fortalecer Capacidades</summary>
+<div class="mech-desc">Impulsar capacidades locales, inclusión y oportunidades sostenibles. Comunidades más preparadas y con más oportunidades.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#0f766e;">4</span><span class="mech-icon">📈</span> Largo Plazo (3+ Años): Consolidar Resultados</summary>
+<div class="mech-desc">Medir, ajustar y escalar lo que genera mayor impacto. Resultados visibles y sostenibles en el territorio.</div></details>
+<details class="mech-details"><summary><span class="mech-num" style="background:#4338ca;">5</span><span class="mech-icon">🏔️</span> Futuro Compartido: Territorios más fuertes</summary>
+<div class="mech-desc">Comunidades prósperas, relaciones de confianza, bienestar, oportunidades y un territorio sostenible.</div></details>
+</div>
+</div>
+'''
+        st.markdown(html_linea, unsafe_allow_html=True)
