@@ -841,7 +841,7 @@ La gran barra roja refleja la transformación de la vegetación secundaria (-205
 
                 layer_satelite = pdk.Layer(
                     "TileLayer",
-                    data="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                    data="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
                 )
 
                 layer_poly = pdk.Layer(
